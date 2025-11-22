@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { CopyButton } from './copy-button';
 
 // 動的に都度ファイルを読むため静的プリレンダーを避ける
 export const dynamic = 'force-dynamic';
@@ -169,29 +170,64 @@ export default async function RecordingDetailPage({
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3 text-sm">
-            <p className="text-muted-foreground">体温</p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-muted-foreground">体温</p>
+              <CopyButton
+                text={
+                  vitals.temperature
+                    ? `体温: ${vitals.temperature}`
+                    : undefined
+                }
+              />
+            </div>
             <p className="text-lg font-semibold">
               {vitals.temperature ?? '記録なし'}
             </p>
           </div>
           <div className="space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3 text-sm">
-            <p className="text-muted-foreground">血圧</p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-muted-foreground">血圧</p>
+              <CopyButton
+                text={
+                  vitals.bloodPressure
+                    ? `血圧: ${vitals.bloodPressure}`
+                    : undefined
+                }
+              />
+            </div>
             <p className="text-lg font-semibold">
               {vitals.bloodPressure ?? '記録なし'}
             </p>
           </div>
           <div className="space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3 text-sm">
-            <p className="text-muted-foreground">脈拍</p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-muted-foreground">脈拍</p>
+              <CopyButton
+                text={vitals.pulse ? `脈拍: ${vitals.pulse}` : undefined}
+              />
+            </div>
             <p className="text-lg font-semibold">
               {vitals.pulse ?? '記録なし'}
             </p>
           </div>
           <div className="space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3 text-sm">
-            <p className="text-muted-foreground">血中酸素飽和度</p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-muted-foreground">血中酸素飽和度</p>
+              <CopyButton
+                text={vitals.spo2 ? `血中酸素飽和度: ${vitals.spo2}` : undefined}
+              />
+            </div>
             <p className="text-lg font-semibold">{vitals.spo2 ?? '記録なし'}</p>
           </div>
           <div className="md:col-span-2 space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3 text-sm">
-            <p className="text-muted-foreground">患者の状況 / 看護記録</p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-muted-foreground">患者の状況 / 看護記録</p>
+              <CopyButton
+                text={
+                  vitals.note ? `患者の状況 / 看護記録: ${vitals.note}` : undefined
+                }
+              />
+            </div>
             <p className="whitespace-pre-wrap leading-relaxed">
               {vitals.note ?? '記録なし'}
             </p>
